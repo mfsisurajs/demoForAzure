@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SecurityDepartmentModelStoreContainer" CdmEntityContainer="SecurityDepartmentEntities">
+    <EntitySetMapping Name="SecurityDepartmentDetails">
+      <EntityTypeMapping TypeName="SecurityDepartmentModel.SecurityDepartmentDetail">
+        <MappingFragment StoreEntitySet="SecurityDepartmentDetail">
+          <ScalarProperty Name="SecurityDepartmentArea" ColumnName="SecurityDepartmentArea" />
+          <ScalarProperty Name="SecurityDepartmentName" ColumnName="SecurityDepartmentName" />
+          <ScalarProperty Name="SecurityDepartmentID" ColumnName="SecurityDepartmentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SecurityPersonnelDetails">
+      <EntityTypeMapping TypeName="SecurityDepartmentModel.SecurityPersonnelDetail">
+        <MappingFragment StoreEntitySet="SecurityPersonnelDetail">
+          <ScalarProperty Name="SecurityDepartmentID" ColumnName="SecurityDepartmentID" />
+          <ScalarProperty Name="SecurityPersonnelAddress" ColumnName="SecurityPersonnelAddress" />
+          <ScalarProperty Name="SecurityPersonnelAge" ColumnName="SecurityPersonnelAge" />
+          <ScalarProperty Name="SecurityPersonnelName" ColumnName="SecurityPersonnelName" />
+          <ScalarProperty Name="SecurityPersonnelID" ColumnName="SecurityPersonnelID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

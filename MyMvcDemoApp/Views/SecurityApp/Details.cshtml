@@ -1,0 +1,83 @@
+﻿@model MyMvcDemoApp.Models.SecurityPersonnelViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SecurityPersonnelDetail</h4>
+    <hr />
+    <table>
+        <tr>
+          
+            @Html.DisplayNameFor(model => model.SecurityPersonnelName)
+            <td>
+                @Html.DisplayFor(model => model.SecurityPersonnelName)
+            </td>
+        </tr>
+        <tr>
+            @Html.DisplayNameFor(model => model.SecurityPersonnelAge)
+            <td>
+                @Html.DisplayFor(model => model.SecurityPersonnelAge)
+            </td>
+               
+        </tr>
+        <tr>
+            @Html.DisplayNameFor(model => model.SecurityPersonnelName)
+            <td>
+                @Html.DisplayFor(model => model.SecurityPersonnelName)
+            </td>
+        </tr>
+        <tr>
+            @Html.DisplayNameFor(model => model.SecurityPersonnelName)
+            <td>
+                @Html.DisplayFor(model => model.SecurityPersonnelName)
+            </td>
+        </tr>
+        <tr>
+            @Html.DisplayNameFor(model => model.SecurityPersonnelName)
+            <td>
+                @Html.DisplayFor(model => model.SecurityPersonnelName)
+            </td>
+        </tr>
+        <tr>
+            @Html.DisplayNameFor(model => model.SecurityPersonnelName)
+            <td>
+                @Html.DisplayFor(model => model.SecurityPersonnelName)
+            </td>
+        </tr>
+        <dt>
+         
+        </dt>
+
+        <dd>
+          
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecurityPersonnelAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecurityPersonnelAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentDetail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentDetail.SecurityDepartmentName)<br />
+
+            @Html.DisplayFor(model => model.DepartmentDetail.SecurityDepartmentArea)
+
+        </dd>
+
+    </table>
+</div>
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SecurityPersonnelID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

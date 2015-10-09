@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SecurityDepartmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="SecurityDepartmentDetail">
+          <Key>
+            <PropertyRef Name="SecurityDepartmentID" />
+          </Key>
+          <Property Name="SecurityDepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SecurityDepartmentName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecurityDepartmentArea" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityPersonnelDetail">
+          <Key>
+            <PropertyRef Name="SecurityPersonnelID" />
+          </Key>
+          <Property Name="SecurityPersonnelID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SecurityPersonnelName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecurityPersonnelAge" Type="smallint" Nullable="false" />
+          <Property Name="SecurityPersonnelAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SecurityDepartmentID" Type="int" />
+        </EntityType>
+        <Association Name="FK_SecurityPersonnelDetail_SecurityDepartmentDetail">
+          <End Role="SecurityDepartmentDetail" Type="Self.SecurityDepartmentDetail" Multiplicity="0..1" />
+          <End Role="SecurityPersonnelDetail" Type="Self.SecurityPersonnelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityDepartmentDetail">
+              <PropertyRef Name="SecurityDepartmentID" />
+            </Principal>
+            <Dependent Role="SecurityPersonnelDetail">
+              <PropertyRef Name="SecurityDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SecurityDepartmentModelStoreContainer">
+          <EntitySet Name="SecurityDepartmentDetail" EntityType="Self.SecurityDepartmentDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityPersonnelDetail" EntityType="Self.SecurityPersonnelDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SecurityPersonnelDetail_SecurityDepartmentDetail" Association="Self.FK_SecurityPersonnelDetail_SecurityDepartmentDetail">
+            <End Role="SecurityDepartmentDetail" EntitySet="SecurityDepartmentDetail" />
+            <End Role="SecurityPersonnelDetail" EntitySet="SecurityPersonnelDetail" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SecurityDepartmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SecurityDepartmentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SecurityDepartmentDetails" EntityType="SecurityDepartmentModel.SecurityDepartmentDetail" />
+          <EntitySet Name="SecurityPersonnelDetails" EntityType="SecurityDepartmentModel.SecurityPersonnelDetail" />
+          <AssociationSet Name="FK_SecurityPersonnelDetail_SecurityDepartmentDetail" Association="SecurityDepartmentModel.FK_SecurityPersonnelDetail_SecurityDepartmentDetail">
+            <End Role="SecurityDepartmentDetail" EntitySet="SecurityDepartmentDetails" />
+            <End Role="SecurityPersonnelDetail" EntitySet="SecurityPersonnelDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SecurityDepartmentDetail">
+          <Key>
+            <PropertyRef Name="SecurityDepartmentID" />
+          </Key>
+          <Property Name="SecurityDepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SecurityDepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SecurityDepartmentArea" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="SecurityPersonnelDetails" Relationship="SecurityDepartmentModel.FK_SecurityPersonnelDetail_SecurityDepartmentDetail" FromRole="SecurityDepartmentDetail" ToRole="SecurityPersonnelDetail" />
+        </EntityType>
+        <EntityType Name="SecurityPersonnelDetail">
+          <Key>
+            <PropertyRef Name="SecurityPersonnelID" />
+          </Key>
+          <Property Name="SecurityPersonnelID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SecurityPersonnelName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SecurityPersonnelAge" Type="Int16" Nullable="false" />
+          <Property Name="SecurityPersonnelAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityDepartmentID" Type="Int32" />
+          <NavigationProperty Name="SecurityDepartmentDetail" Relationship="SecurityDepartmentModel.FK_SecurityPersonnelDetail_SecurityDepartmentDetail" FromRole="SecurityPersonnelDetail" ToRole="SecurityDepartmentDetail" />
+        </EntityType>
+        <Association Name="FK_SecurityPersonnelDetail_SecurityDepartmentDetail">
+          <End Type="SecurityDepartmentModel.SecurityDepartmentDetail" Role="SecurityDepartmentDetail" Multiplicity="0..1" />
+          <End Type="SecurityDepartmentModel.SecurityPersonnelDetail" Role="SecurityPersonnelDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityDepartmentDetail">
+              <PropertyRef Name="SecurityDepartmentID" />
+            </Principal>
+            <Dependent Role="SecurityPersonnelDetail">
+              <PropertyRef Name="SecurityDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SecurityDepartmentModelStoreContainer" CdmEntityContainer="SecurityDepartmentEntities">
+          <EntitySetMapping Name="SecurityDepartmentDetails">
+            <EntityTypeMapping TypeName="SecurityDepartmentModel.SecurityDepartmentDetail">
+              <MappingFragment StoreEntitySet="SecurityDepartmentDetail">
+                <ScalarProperty Name="SecurityDepartmentArea" ColumnName="SecurityDepartmentArea" />
+                <ScalarProperty Name="SecurityDepartmentName" ColumnName="SecurityDepartmentName" />
+                <ScalarProperty Name="SecurityDepartmentID" ColumnName="SecurityDepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityPersonnelDetails">
+            <EntityTypeMapping TypeName="SecurityDepartmentModel.SecurityPersonnelDetail">
+              <MappingFragment StoreEntitySet="SecurityPersonnelDetail">
+                <ScalarProperty Name="SecurityDepartmentID" ColumnName="SecurityDepartmentID" />
+                <ScalarProperty Name="SecurityPersonnelAddress" ColumnName="SecurityPersonnelAddress" />
+                <ScalarProperty Name="SecurityPersonnelAge" ColumnName="SecurityPersonnelAge" />
+                <ScalarProperty Name="SecurityPersonnelName" ColumnName="SecurityPersonnelName" />
+                <ScalarProperty Name="SecurityPersonnelID" ColumnName="SecurityPersonnelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

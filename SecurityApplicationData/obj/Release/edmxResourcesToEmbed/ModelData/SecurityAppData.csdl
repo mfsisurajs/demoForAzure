@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SecurityDepartmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SecurityDepartmentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="SecurityDepartmentDetails" EntityType="SecurityDepartmentModel.SecurityDepartmentDetail" />
+    <EntitySet Name="SecurityPersonnelDetails" EntityType="SecurityDepartmentModel.SecurityPersonnelDetail" />
+    <AssociationSet Name="FK_SecurityPersonnelDetail_SecurityDepartmentDetail" Association="SecurityDepartmentModel.FK_SecurityPersonnelDetail_SecurityDepartmentDetail">
+      <End Role="SecurityDepartmentDetail" EntitySet="SecurityDepartmentDetails" />
+      <End Role="SecurityPersonnelDetail" EntitySet="SecurityPersonnelDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SecurityDepartmentDetail">
+    <Key>
+      <PropertyRef Name="SecurityDepartmentID" />
+    </Key>
+    <Property Name="SecurityDepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SecurityDepartmentName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="SecurityDepartmentArea" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="SecurityPersonnelDetails" Relationship="SecurityDepartmentModel.FK_SecurityPersonnelDetail_SecurityDepartmentDetail" FromRole="SecurityDepartmentDetail" ToRole="SecurityPersonnelDetail" />
+  </EntityType>
+  <EntityType Name="SecurityPersonnelDetail">
+    <Key>
+      <PropertyRef Name="SecurityPersonnelID" />
+    </Key>
+    <Property Name="SecurityPersonnelID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SecurityPersonnelName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="SecurityPersonnelAge" Type="Int16" Nullable="false" />
+    <Property Name="SecurityPersonnelAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityDepartmentID" Type="Int32" />
+    <NavigationProperty Name="SecurityDepartmentDetail" Relationship="SecurityDepartmentModel.FK_SecurityPersonnelDetail_SecurityDepartmentDetail" FromRole="SecurityPersonnelDetail" ToRole="SecurityDepartmentDetail" />
+  </EntityType>
+  <Association Name="FK_SecurityPersonnelDetail_SecurityDepartmentDetail">
+    <End Type="SecurityDepartmentModel.SecurityDepartmentDetail" Role="SecurityDepartmentDetail" Multiplicity="0..1" />
+    <End Type="SecurityDepartmentModel.SecurityPersonnelDetail" Role="SecurityPersonnelDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SecurityDepartmentDetail">
+        <PropertyRef Name="SecurityDepartmentID" />
+      </Principal>
+      <Dependent Role="SecurityPersonnelDetail">
+        <PropertyRef Name="SecurityDepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
